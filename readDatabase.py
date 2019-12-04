@@ -19,11 +19,13 @@ def readDatabase(databasePointer):
     MUID,
     VUID,
     Name as Trim,
+    Height,
+    FootPrintWidth,
+    FootPrintLength,
     DriveType,
     GearboxType,
     GearboxRatios,
     Differential,
-    PowerDistribution,
     TyreType,
     Tyres,
     OverallDiameter,
@@ -42,9 +44,11 @@ def readDatabase(databasePointer):
     RearPadSize,
     BrakeBias,
     Undertray,
-    FrontRowSeats,
-    SecondRowSeats,
-    ThirdRowSeats,
+    Downforce,
+    ActiveWing,
+    ActiveCooling,
+    InclinationFront,
+    InclinationRear,
     Interior,
     Entertainment,
     PowerSteering,
@@ -54,11 +58,20 @@ def readDatabase(databasePointer):
     Dampers,
     SwayBars,
     FrontCamber,
-    RearCamber
+    RearCamber,
+    QualityBody,
+    QualityGearbox,
+    QualityTyre,
+    QualityBrakes,
+    QualityInterior,
+    QualityElectronics,
+    QualitySafety,
+    QualitySuspension
     FROM Trims""")
-    rows = c.fetchall()
-    for d in rows:
+    trims = c.fetchall()
+    for d in trims:
         data.append(d)
+
     for d in data:
         c.execute("""SELECT
         Name as Model,
@@ -67,12 +80,22 @@ def readDatabase(databasePointer):
         EnginePlacement,
         FrontSuspension,
         RearSuspension,
-        PanelMaterial
+        PanelMaterial,
+        QualityChassis
         FROM Models WHERE UID=?""", (d["MUID"],))
         model = c.fetchone()
         for key in model:
             d[key] = model[key]
 
+        c.execute("""SELECT
+        UID as TRUID,
+        *
+        FROM TrimResults WHERE UID=?""", (d["UID"],))
+        trimResult = c.fetchone()
+        if trimResult is not None:
+            for key in trimResult:
+                d[key] = trimResult[key]
+            
         c.execute("""SELECT
         FUID,
         Name as Variant,
@@ -98,12 +121,18 @@ def readDatabase(databasePointer):
         Stroke as VariantStroke,
         Capacity,
         Compression,
+        CamProfileSetting,
+        VVLCamProfileSetting,
         AFR,
         RPMLimit,
         ARRatio,
-        BoostCutOff
+        BoostCutOff,
+        QualityBottomEnd,
+        QualityTopEnd,
+        QualityAspiration,
+        QualityFuelSystem,
+        QualityExhaust
         FROM Variants WHERE UID=?""", (d['VUID'],))
-
         variant = c.fetchone()
         for key in variant:
             d[key] = variant[key]
@@ -119,9 +148,17 @@ def readDatabase(databasePointer):
         VVL,
         Bore,
         Stroke
-        FROM Families WHERE UID=?""",
-                  (d['FUID'],))
+        FROM Families WHERE UID=?""", (d['FUID'],))
         family = c.fetchone()
         for key in family:
             d[key] = family[key]
+
+        c.execute("""SELECT
+        *,
+        UID as ERID
+        FROM EngineResults WHERE UID=?""", (d['VUID'],))
+        engineResult = c.fetchone()
+        if engineResult is not None:       
+            for key in engineResult:
+                d[key] = engineResult[key]
     return data
