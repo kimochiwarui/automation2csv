@@ -19,7 +19,6 @@ def readDatabase(databasePointer):
     MUID,
     VUID,
     Name as Trim,
-    Height,
     FootPrintWidth,
     FootPrintLength,
     DriveType,
@@ -126,7 +125,6 @@ def readDatabase(databasePointer):
         AFR,
         RPMLimit,
         ARRatio,
-        BoostCutOff,
         QualityBottomEnd,
         QualityTopEnd,
         QualityAspiration,
@@ -154,7 +152,25 @@ def readDatabase(databasePointer):
             d[key] = family[key]
 
         c.execute("""SELECT
-        *,
+        CoolingRequired,
+        EngineeringTime,
+        IdleSpeed,
+        ManHours,
+        MaterialCost as EngineMaterialCost,
+        Noise,
+        PeakBoost,
+        PeakBoostRPM,
+        PeakTorque,
+        PeakTorqueRPM,
+        PeakPower,
+        PeakPowerRPM,
+        MaxRPM,
+        PerformanceIndex,
+        RON,
+        Responsiveness,
+        Smoothness,
+        Weight as EngineWeight,
+        ServiceCost as EngineServiceCost,
         UID as ERID
         FROM EngineResults WHERE UID=?""", (d['VUID'],))
         engineResult = c.fetchone()

@@ -59,6 +59,7 @@ class carList(tk.Frame):
                              text=entry['Model'] + ' - ' + entry['Trim'],
                              background="#ffffff",
                              padx='12', pady='6')
+                            #  Fix bug of wrongly chosen car when filtered
             button = tk.Button(self.scrollFrame.viewPort,
                             padx='12', pady='6',
                             text='Export ', 
@@ -106,16 +107,25 @@ def filterData(data):
 def createCSV(item):
     choice = tkvar.get()
     csv = ''
-    content = open(choice + '.txt').readline()
-    settingsList = content.split(',')
-    for line in settingsList:
-        for word in line.split('*'):
-            if word.startswith('+'):
-                csv += replaceValues(word.replace('+', ''), item[word.replace('+', '')])
-            else:
-                csv += word
-        csv += ','
-    return csv
+    if choice == 'Full':
+        for entry in item:
+            csv += entry + ', '
+        csv += '\n'
+        for entry in item:
+            result = replaceValues(entry, item[entry])
+            csv += str(result) + ', '
+        return csv
+    else:
+        content = open(choice + '.txt').readline()
+        settingsList = content.split(',')
+        for line in settingsList:
+            for word in line.split('*'):
+                if word.startswith('+'):
+                    csv += str(replaceValues(word.replace('+', ''), item[word.replace('+', '')]))
+                else:
+                    csv += word
+            csv += ','
+        return csv
 
 
 def saveCSV(string, filename):
@@ -153,9 +163,10 @@ class renderCars(tk.Frame):
 if __name__ == "__main__":
     app = tk.Tk()
     app.minsize(500, 500)
+    app.title('Automation2CSV')
     icon = tk.PhotoImage(file='icon2.png')
     app.iconphoto(False, icon)
-    databasePointer = 'database/Sandbox_openbeta.db'
+    databasePointer = os.path.expanduser('~/Documents/My Games/Automation/Sandbox_openbeta.db')
     data = []
     sv = tk.StringVar(app)
     choices = {'Full', 'Basic', 'CSR'}

@@ -49,7 +49,6 @@ Here is a list of all keys, they are the same as db table headers.
 | FuelType                |
 | RON                     |
 | Price                   |
-smothness responsivness power capacity
 
 #### Trims
 | Key                   |       Description       |
@@ -124,25 +123,25 @@ smothness responsivness power capacity
 | Key                  |       Description        |
 | -------------------- | :----------------------: |
 | Variant              |       Variant Name       |
+| EngineWeight         |
 | CoolingRequired      |
 | Emissions            |
 | EngineeringTime      |
 | IdleSpeed            |
-| AdjustedAFR          |
 | ManHours             |
 | MaterialCost         |
 | Noise                |
 | PeakBoost            |
+| PeakBoostRPM         |
 | PerfomanceIndex      |
 | Responsiveness       |
 | ServiceCost          |
 | Smoothness           |
-| Weight               |
 | PeakTorqueRPM        |
 | PeakPower            |
 | PeakPowerRPM         |
 | MaxRPM               |
-| VarianBore           |                          
+| VarianBore           |
 | VariantStroke        |
 | Capacity             |
 | Crank                |

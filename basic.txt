@@ -1,1 +1,1 @@
-*+Model* *+Trim*, *+DriveType*, *+GearboxType* - *+GearboxRatios* gears, *+Differential*
+*+Model* *+Trim*, Width: *+FootPrintWidth*m Length: , Engine weight: *+EngineWeight*kg Total Weight*+Weight*kg, *+EngineServiceCost*$ *+ServiceCosts*$
