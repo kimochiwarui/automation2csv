@@ -1,4 +1,5 @@
 import os
+import fnmatch
 import tkinter as tk
 from functools import partial
 from readDatabase import readDatabase
@@ -63,13 +64,12 @@ class carList(tk.Frame):
             button = tk.Button(self.scrollFrame.viewPort,
                             padx='12', pady='6',
                             text='Export ', 
-                            command=partial(exportCar, data[c]))
+                            command=partial(exportCar, filteredData[c]['UID']))
             model.grid(pady='6', row=c, column=0)
             button.grid(row=c, column=1)
 
         # when packing the scrollframe, we pack scrollFrame itself (NOT the viewPort)
         self.scrollFrame.pack(side="top", fill="both", expand=True)
-
 
 class controls(tk.Frame):
     def __init__(self, root):
@@ -78,12 +78,12 @@ class controls(tk.Frame):
         filterLabel = tk.Button(
             self.controls, text='Filter name to:', command=cars.refresh)
         filterLabel.grid(row=1, column=1)
-        filterInput = tk.Entry(self.controls, textvariable=sv)
+        filterInput = tk.Entry(self.controls, textvariable=filterInputData)
         filterInput.grid(padx='12', pady='12', row=1, column=2)
 
         presetLabel = tk.Label(self.controls, text='Choose export preset')
         presetLabel.grid(row=3, column=1)
-        presetMenu = tk.OptionMenu(self.controls, tkvar, *choices)
+        presetMenu = tk.OptionMenu(self.controls, presetChose, *presetChoices)
         presetMenu.grid(pady='12', row=3, column=2)
 
         exportAllBtn = tk.Button(self.controls, text='Export Filtered', command=exportFiltered)
@@ -94,10 +94,10 @@ class controls(tk.Frame):
 def filterData(data):
     filteredData = []
     for item in data:
-        if sv.get():
-            if sv.get().lower() in item['Model'].lower():
+        if filterInputData.get():
+            if filterInputData.get().lower() in item['Model'].lower():
                 filteredData.append(item)
-            elif sv.get().lower() in item['Trim'].lower():
+            elif filterInputData.get().lower() in item['Trim'].lower():
                 filteredData.append(item)
         else:
             filteredData.append(item)
@@ -105,15 +105,14 @@ def filterData(data):
 
 
 def createCSV(item):
-    choice = tkvar.get()
+    choice = presetChose.get()
     csv = ''
     if choice == 'Full':
         for entry in item:
             csv += entry + ', '
         csv += '\n'
         for entry in item:
-            result = replaceValues(entry, item[entry])
-            csv += str(result) + ', '
+            csv += str(replaceValues(entry, item[entry])) + ', '
         return csv
     else:
         content = open(choice + '.txt').readline()
@@ -121,7 +120,10 @@ def createCSV(item):
         for line in settingsList:
             for word in line.split('*'):
                 if word.startswith('+'):
-                    csv += str(replaceValues(word.replace('+', ''), item[word.replace('+', '')]))
+                    if word.replace('+', '') in item:
+                        csv += str(replaceValues(word.replace('+', ''), item[word.replace('+', '')]))
+                    else: 
+                        csv += 'ND'
                 else:
                     csv += word
             csv += ','
@@ -134,9 +136,17 @@ def saveCSV(string, filename):
     f.close()
 
 
-def exportCar(car):
-    csv = createCSV(car)
-    saveCSV(csv, car['Model'] + ' ' + car['Trim'])
+def exportCar(uid):
+    for item in data:
+        if item['UID'] == uid:
+            car = item
+    try:
+        assert(car)
+        csv = createCSV(car)
+        saveCSV(csv, car['Model'] + ' ' + car['Trim'])
+    except:
+        print('Error, no car found')
+        pass
 
 
 def exportFiltered():
@@ -145,7 +155,7 @@ def exportFiltered():
     for item in filteredData:
         csv += createCSV(item)
         csv += '\n'
-    saveCSV(csv, sv.get() + ' collection of ' + str(len(filteredData)))
+    saveCSV(csv, 'Collection of ' + str(len(filteredData)) + ' by ' + filterInputData.get())
 
 
 class renderCars(tk.Frame):
@@ -168,10 +178,14 @@ if __name__ == "__main__":
     app.iconphoto(False, icon)
     databasePointer = os.path.expanduser('~/Documents/My Games/Automation/Sandbox_openbeta.db')
     data = []
-    sv = tk.StringVar(app)
-    choices = {'Full', 'Basic', 'CSR'}
-    tkvar = tk.StringVar(app)
-    tkvar.set('Basic')
+    filterInputData = tk.StringVar(app)
+    presetChose = tk.StringVar(app)
+    presetChoices = {'Full'}
+    presetChose.set('Full')
+    # Threats all .txt files as presets
+    for f in os.listdir('.'):
+        if fnmatch.fnmatch(f, '*.txt'):
+            presetChoices.add(f.split('.')[0])
     data = readDatabase(databasePointer)
     cars = renderCars(app)
     cars.pack(side='left')

@@ -87,8 +87,36 @@ def readDatabase(databasePointer):
             d[key] = model[key]
 
         c.execute("""SELECT
-        UID as TRUID,
-        *
+        GameVersion,
+        BodyType,
+        Year
+        BodyYear,
+        DrivabilityValue,
+        SportinessValue,
+        ComfortValue,
+        PrestigeValue,
+        SafetyValue,
+        Practicality,
+        Utility,
+        Offroad,
+        Weight,
+        Economy,
+        CargoVolume,
+        EnvironmentalResistance,
+        Emissions,
+        TowWeight,
+        FullSeats,
+        TempSeats,
+        Reliability,
+        Cornering,
+        HundredTime,
+        TopSpeed,
+        KilometerTime,
+        BrakingDistance,
+        QuarterMileTime,
+        PowerDistribution,
+        Price,
+        ServiceCosts
         FROM TrimResults WHERE UID=?""", (d["UID"],))
         trimResult = c.fetchone()
         if trimResult is not None:
@@ -123,7 +151,7 @@ def readDatabase(databasePointer):
         CamProfileSetting,
         VVLCamProfileSetting,
         AFR,
-        RPMLimit,
+        IgnitionTimingSetting,
         ARRatio,
         QualityBottomEnd,
         QualityTopEnd,
@@ -153,10 +181,7 @@ def readDatabase(databasePointer):
 
         c.execute("""SELECT
         CoolingRequired,
-        EngineeringTime,
         IdleSpeed,
-        ManHours,
-        MaterialCost as EngineMaterialCost,
         Noise,
         PeakBoost,
         PeakBoostRPM,
@@ -165,13 +190,16 @@ def readDatabase(databasePointer):
         PeakPower,
         PeakPowerRPM,
         MaxRPM,
-        PerformanceIndex,
         RON,
+        PerformanceIndex,
         Responsiveness,
         Smoothness,
         Weight as EngineWeight,
-        ServiceCost as EngineServiceCost,
-        UID as ERID
+        EngineeringTime as EngineEngineeringTime,
+        Emissions as EngineEmissions,
+        ManHours,
+        MaterialCost as EngineMaterialCost,
+        ServiceCost as EngineServiceCost
         FROM EngineResults WHERE UID=?""", (d['VUID'],))
         engineResult = c.fetchone()
         if engineResult is not None:       

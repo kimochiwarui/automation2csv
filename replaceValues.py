@@ -329,16 +329,16 @@ def replaceValues(arg, argValue):
             'FuelType_Super100_Name': 'Ultimate'
         },
         'FuelSystemType': {
-            'FuelSys_Carb_Name': 'Carbulators',
+            'FuelSys_Carb_Name': 'Carburetor',
             'FuelSys_Inj_Name': 'Injection',
         },
         'FuelSystem': {
-            'FuelSys_Carb_1Barrel_Name': '1 Barrel',
-            'FuelSys_Carb_1BarrelEco_Name': '1 Barrel Eco',
-            'FuelSys_Carb_2Barrel_Name': '2 Barrel',
-            'FuelSys_Carb_4Barrel_Name': '4 Barrel',
+            'FuelSys_Carb_1Barrel_Name': '1 BRL',
+            'FuelSys_Carb_1BarrelEco_Name': '1 BRL Eco',
+            'FuelSys_Carb_2Barrel_Name': '2 BRL',
+            'FuelSys_Carb_4Barrel_Name': '4 BRL',
             'FuelSys_Carb_DCOE_Name': 'DCOE',
-            'FuelSys_Inj_Mech_Name': 'Mechanical Fuel Injection',
+            'FuelSys_Inj_Mech_Name': 'MFI',
             'FuelSys_Inj_SingEFI_Name': 'SPFI',
             'FuelSys_Inj_MultiEFI_Name': 'MPFI',
             'FuelSys_Inj_Direct_Name': 'Direct Injection'
@@ -460,7 +460,7 @@ def replaceValues(arg, argValue):
 
     toFloat2 = {
         'Cornering',
-        'Convert'
+        'Capacity'
     }
 
     if arg == 'FootPrintWidth':
@@ -469,7 +469,7 @@ def replaceValues(arg, argValue):
     elif arg == 'FootPrintLength':
         return round(argValue / 100, 2)
 
-    if arg == 'Power':
+    if arg == 'PeakPower':
         # Convert kW to HP
         return round(argValue * 1.34102208, 1)
 
