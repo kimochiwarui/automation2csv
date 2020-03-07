@@ -1,2 +1,6 @@
 database
+build
+*.spec
 __*__
+
+pyinstaller --log-level=WARN --windowed  --onefile --add-data="icon2.png;img" app.py
