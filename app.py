@@ -75,6 +75,7 @@ class controls(tk.Frame):
     def __init__(self, root):
         tk.Frame.__init__(self, root)
         self.controls = tk.Frame(self)
+
         filterLabel = tk.Button(
             self.controls, text='Filter name to:', command=cars.refresh)
         filterLabel.grid(row=1, column=1)
@@ -86,7 +87,7 @@ class controls(tk.Frame):
         presetMenu = tk.OptionMenu(self.controls, presetChose, *presetChoices)
         presetMenu.grid(pady='12', row=3, column=2)
 
-        exportAllBtn = tk.Button(self.controls, text='Export Filtered', command=exportFiltered)
+        exportAllBtn = tk.Button(self.controls, text='Export All', command=exportFiltered)
         exportAllBtn.grid(pady='12', row=6, column=1)
         self.controls.pack()
 
@@ -155,7 +156,10 @@ def exportFiltered():
     for item in filteredData:
         csv += createCSV(item)
         csv += '\n'
-    saveCSV(csv, 'Collection of ' + str(len(filteredData)) + ' by ' + filterInputData.get())
+    filename = 'Collection of ' + str(len(filteredData))
+    if filterInputData.get() is not None:
+        filename += ' by ' + filterInputData.get()
+    saveCSV(csv, filename)
 
 
 class renderCars(tk.Frame):
@@ -174,18 +178,20 @@ if __name__ == "__main__":
     app = tk.Tk()
     app.minsize(500, 500)
     app.title('Automation2CSV')
-    icon = tk.PhotoImage(file='icon2.png')
-    app.iconphoto(False, icon)
-    databasePointer = os.path.expanduser('~/Documents/My Games/Automation/Sandbox_openbeta.db')
-    data = []
+    # icon = tk.PhotoImage(file='/img/icon2.png')
+    # app.iconphoto(False, icon)
+
     filterInputData = tk.StringVar(app)
     presetChose = tk.StringVar(app)
     presetChoices = {'Full'}
-    presetChose.set('Full')
+    presetChose.set('Basic')
     # Threats all .txt files as presets
     for f in os.listdir('.'):
         if fnmatch.fnmatch(f, '*.txt'):
             presetChoices.add(f.split('.')[0])
+
+    databasePointer = os.path.expanduser('~/Documents/My Games/Automation/Sandbox_openbeta.db')
+    data = []
     data = readDatabase(databasePointer)
     cars = renderCars(app)
     cars.pack(side='left')

@@ -37,10 +37,10 @@ This list of almost full to the in game, with notable exception of wheelbase, 20
 | Key             |  Description   |
 | --------------- | :------------: |
 | FootPrintWidth  | Vehicle Width  |
-| FootrpintLength | Vehicle Length |
+| FootPrintLength | Vehicle Length |
 | Economy         |   in l/100km   |
 | Weight          |     in kg      |
-| CargoVolume     |
+| CargoVolume     |       l        |
 | Emissions       | trim emission  |
 | FullSeats       |      # of      |
 | TempSeats       |      # of      |
@@ -65,6 +65,7 @@ This list of almost full to the in game, with notable exception of wheelbase, 20
 | --------------- | :---------------------: |
 | Chassis         | Choice of Ladder/Monock |
 | ChassisMaterial |   Material of chassis   |
+| EnginePlacement |     Engine Position     |
 | FrontSuspension |
 | RearSuspension  |
 | PanelMaterial   |

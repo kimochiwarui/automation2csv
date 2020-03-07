@@ -85,6 +85,15 @@ def readDatabase(databasePointer):
         model = c.fetchone()
         for key in model:
             d[key] = model[key]
+        
+        # c.execute("""SELECT
+        # ProductionUnits,
+        # MaterialCosts,
+        # BaseTime as EngeeringTime
+        # FROM TrimEngineeringInfo WHERE UID=?""", (d["UID"],))
+        # engineeringInfo = c.fetchone()
+        # for key in engineeringInfo:
+        #     d[key] = engineeringInfo[key]
 
         c.execute("""SELECT
         GameVersion,

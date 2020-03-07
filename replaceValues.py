@@ -460,7 +460,10 @@ def replaceValues(arg, argValue):
 
     toFloat2 = {
         'Cornering',
-        'Capacity'
+        'Capacity',
+        'ProductionUnits',
+        'EngineeringTime',
+        'MaterialCosts'
     }
 
     if arg == 'FootPrintWidth':
