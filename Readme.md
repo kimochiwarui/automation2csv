@@ -58,7 +58,6 @@ This list of almost full to the in game, with notable exception of wheelbase, 20
 | Cornering       |  20m g-force  |
 | BrakingDistance |    meters     |
 | TowWeight       |      kg       |
-| QualityBody     | ????????????? |
 
 #### Chassis
 | Key             |       Description       |
