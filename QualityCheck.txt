@@ -1,1 +1,0 @@
-*+Model*,,,, *+EngeeringTime*, *+MaterialCosts*, *+DrivabilityValue*, *+SportinessValue*, *+ComfortValue*, *+PrestigeValue*, *+SafetyValue*, *+Practicality*, *+Utility*, *+Offroad*, *+Reliability*, *+EnvironmentalResistance*, *+Weight*, *+HundredTime*, *+TopSpeed*, *+Cornering*

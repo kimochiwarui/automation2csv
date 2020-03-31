@@ -39,8 +39,8 @@ This list of almost full to the one in game, with notable exception of wheelbase
 ### Trim Stats
 | Key             |       Description        |
 | --------------- | :----------------------: |
-| FootPrintWidth  | Vehicle Width in metres  |
-| FootPrintLength | Vehicle Length in metres |
+| FootPrintWidth  | Vehicle Width in meters  |
+| FootPrintLength | Vehicle Length in meters |
 | Economy         |        in l/100km        |
 | Weight          |          in kg           |
 | CargoVolume     |        in litres         |
