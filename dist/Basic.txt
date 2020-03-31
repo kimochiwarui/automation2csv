@@ -1,0 +1,1 @@
+*+Model* *+Trim*, *+EnginePlacement* - *+DriveType*, *+BlockConfig* / *+Capacity* l / *+Aspiration*, *+Economy* l/100km, *+PeakPower* hp @ *+PeakPowerRPM* rpm, *+PeakTorque* Nm @ *+PeakTorqueRPM*rpm, *+TopSpeed* km/h, *+HundredTime* s, *+DrivabilityValue*, *+SportinessValue*, *+ComfortValue*, *+FootPrintLength* m / *+FootPrintWidth* m, *+Weight*kg, *+Price* $, *+ServiceCosts* $,

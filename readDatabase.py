@@ -24,6 +24,7 @@ def readDatabase(databasePointer):
     DriveType,
     GearboxType,
     GearboxRatios,
+    SpeedLimiter,
     Differential,
     TyreType,
     Tyres,
@@ -36,7 +37,7 @@ def readDatabase(databasePointer):
     RimMaterial,
     FrontBrakeType,
     FrontBrakeOptions,
-    FrontPadType,
+    FrontPadType as PadType,
     FrontPadSize,
     RearBrakeType,
     RearBrakeOptions,
@@ -48,20 +49,33 @@ def readDatabase(databasePointer):
     ActiveCooling,
     InclinationFront,
     InclinationRear,
+    CoolingAirflowFraction,
+    BrakeCoolingFraction,
     Interior,
     Entertainment,
     PowerSteering,
     Assist,
-    Safety,
+    Safety as SafetyFeatures,
     Springs,
     Dampers,
     SwayBars,
     FrontCamber,
     RearCamber,
+    FrontSpringStiffness,
+    RearSpringStiffness,
+    FrontDamperStiffness,
+    RearDamperStiffness,
+    FrontSwayBarStiffness,
+    RearSwayBarStiffness,
+    RideHeight,
+    SuspensionOffset,
+    BaseFrontTrackWidth,
+    BaseRearTrackWidth,
     QualityBody,
     QualityGearbox,
     QualityTyre,
     QualityBrakes,
+    QualityAero,
     QualityInterior,
     QualityElectronics,
     QualitySafety,
@@ -85,7 +99,7 @@ def readDatabase(databasePointer):
         model = c.fetchone()
         for key in model:
             d[key] = model[key]
-        
+
         # c.execute("""SELECT
         # ProductionUnits,
         # MaterialCosts,
@@ -100,11 +114,11 @@ def readDatabase(databasePointer):
         BodyType,
         Year
         BodyYear,
-        DrivabilityValue,
-        SportinessValue,
-        ComfortValue,
-        PrestigeValue,
-        SafetyValue,
+        DrivabilityValue as Drivability,
+        SportinessValue as Sportiness,
+        ComfortValue as Comfort,
+        PrestigeValue as Prestige,
+        SafetyValue as Safety,
         Practicality,
         Utility,
         Offroad,
@@ -131,7 +145,7 @@ def readDatabase(databasePointer):
         if trimResult is not None:
             for key in trimResult:
                 d[key] = trimResult[key]
-            
+
         c.execute("""SELECT
         FUID,
         Name as Variant,
@@ -150,6 +164,7 @@ def readDatabase(databasePointer):
         FuelType,
         Headers,
         ExhaustCount,
+        ExhaustDiameter,
         Cat,
         Muffler1,
         Muffler2,
@@ -204,14 +219,14 @@ def readDatabase(databasePointer):
         Responsiveness,
         Smoothness,
         Weight as EngineWeight,
-        EngineeringTime as EngineEngineeringTime,
+        EngineeringTime as EngineET,
         Emissions as EngineEmissions,
-        ManHours,
+        ManHours as EnginePU,
         MaterialCost as EngineMaterialCost,
         ServiceCost as EngineServiceCost
         FROM EngineResults WHERE UID=?""", (d['VUID'],))
         engineResult = c.fetchone()
-        if engineResult is not None:       
+        if engineResult is not None:
             for key in engineResult:
                 d[key] = engineResult[key]
     return data

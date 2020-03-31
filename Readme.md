@@ -1,32 +1,35 @@
 ## automation2csv
-It is db exporter.
+It is Automation Game db exporter.
 
-To create custom export preset for exporter incorporate key in ** and add + as prefix e.g. \*+Model\*, \*+Trim\*, \*+DrivabilityValue\*
+![](https://i.imgur.com/6Pa5p1e.png)
 
+Either run with python or run app.exe file in dist.
+To create custom export preset for exporter incorporate key in ** and add + as prefix e.g. \*+Model\*, \*+Trim\*, \*+Drivability\* save that as txt file in same folder as run executable.
 
-Here is a list of all keys, 95% are the same as db table headers. Returned data is mostly metric.
+### Legend
+Here is a list of all exportable keys, 80% are the same as db table headers. Returned data is mostly metric.
 
-This list of almost full to the in game, with notable exception of wheelbase, 200m g-force, Trim Material cost, Trim Engineering Time and Trim Production Units.
+This list of almost full to the one in game, with notable exception of wheelbase, 200m g-force, Trim Material cost, Trim Engineering Time and Trim Production Units, Interior Space.
 
 ### Names
 
-| Key      |      Description      |
-| -------- | :-------------------: |
-| Model    |    Car Model name     |
-| Trim     |     Car Trim name     |
-| Family   |  Engine Family name   |
-| Variant  |  Engine Variant name  |
-| Year     |       Trim Year       |
-| BodyType | "Sedan" / "Hatchback" |
+| Key      |                Description                |
+| -------- | :---------------------------------------: |
+| Model    |                Model name                 |
+| Trim     |                 Trim name                 |
+| Family   |               Engine Family               |
+| Variant  |              Engine Variant               |
+| Year     |                 Trim Year                 |
+| BodyType | "Sedan" / "Hatchback" (line as in editor) |
 
 ### Calculated Automation stats
 | Key                     |
 | ----------------------- |
-| DrivabilityValue        |             
-| SportinessValue         |            
-| ComfortValue            |             
-| PrestigeValue           |
-| SafetyValue             |
+| Drivability             |
+| Sportiness              |
+| Comfort                 |
+| Prestige                |
+| Safety                  |
 | Practicality            |
 | Utility                 |
 | Offroad                 |
@@ -34,176 +37,193 @@ This list of almost full to the in game, with notable exception of wheelbase, 20
 | EnvironmentalResistance |
 
 ### Trim Stats
-| Key             |  Description   |
-| --------------- | :------------: |
-| FootPrintWidth  | Vehicle Width  |
-| FootPrintLength | Vehicle Length |
-| Economy         |   in l/100km   |
-| Weight          |     in kg      |
-| CargoVolume     |       l        |
-| Emissions       | trim emission  |
-| FullSeats       |      # of      |
-| TempSeats       |      # of      |
-| RON             |   in number    |
-| ServiceCosts    |                |
-| Price           | Assumed Price  |
+| Key             |       Description        |
+| --------------- | :----------------------: |
+| FootPrintWidth  | Vehicle Width in metres  |
+| FootPrintLength | Vehicle Length in metres |
+| Economy         |        in l/100km        |
+| Weight          |          in kg           |
+| CargoVolume     |        in litres         |
+| Emissions       |      Trim emission       |
+| FullSeats       |           # of           |
+| TempSeats       |           # of           |
+| RON             |   Required RON rating    |
+| ServiceCosts    |         in $AGD          |
+| Price           |  Assumed Price in $AGD   |
 
 ### Perfomance
-| Key             |  Description  |
-| --------------- | :-----------: |
-| HundredTime     |     0-100     |
-| QuarterMileTime |    seconds    |
-| KilometerTime   |    seconds    |
-| TopSpeed        |    in km/h    |
-| Cornering       |  20m g-force  |
-| BrakingDistance |    meters     |
-| TowWeight       |      kg       |
+| Key             | Description |
+| --------------- | :---------: |
+| HundredTime     |    0-100    |
+| QuarterMileTime |   seconds   |
+| KilometerTime   |   seconds   |
+| TopSpeed        |   in km/h   |
+| Cornering       | 20m g-force |
+| BrakingDistance |   meters    |
+| TowWeight       |     kg      |
 
-#### Chassis
-| Key             |       Description       |
-| --------------- | :---------------------: |
-| Chassis         | Choice of Ladder/Monock |
-| ChassisMaterial |   Material of chassis   |
-| EnginePlacement |     Engine Position     |
-| FrontSuspension |
-| RearSuspension  |
-| PanelMaterial   |
-| QualityChassis  |
+### Chassis
+| Key             |     Description      |
+| --------------- | :------------------: |
+| Chassis         |    for all below     |
+| ChassisMaterial |  line as in editor   |
+| EnginePlacement |                      |
+| FrontSuspension |                      |
+| RearSuspension  |                      |
+| PanelMaterial   |                      |
+| QualityChassis  | Quality points spent |
 
 ### Drivetrain
-| Key               |         Description          |
-| ----------------- | :--------------------------: |
-| DriveType         |       4x4/AWD/RWD/FWD        |
-| GearboxType       |                              |
-| GearboxRatios     |          # of gears          |
-| Differential      |      Differential type       |
-| PowerDistribution |   in number, 0 rwd - 1 fwd   |
-| QualityGearbox    | # of Quality points spent on |
+| Key               |                        Description                         |
+| ----------------- | :--------------------------------------------------------: |
+| DriveType         |                       for all below                        |
+| GearboxType       |                     line as in editor                      |
+| GearboxRatios     |                         # of gears                         |
+| SpeedLimiter      |                     in km/h, 0 - none                      |
+| Differential      |                     line as in editor                      |
+| PowerDistribution | Float number, useful for awd vehicles, 0 - rwd and 1 - fwd |
+| QualityGearbox    |                    Quality points spent                    |
 
 
 ### Tyres
-| Key             |   Description   |
-| --------------- | :-------------: |
-| TyreType        | Crossply/Radial |
-| Tyres           |  Tyre compound  |
-| OverallDiameter |    of wheel     |
-| RimDiameter     |       in        |
-| FrontTyreWidth  |       mm        |
-| RearTyreWidth   |       mm        |
-| RimMaterial     | Chosen material |
-| QualityTyre     |                 |
+| Key             |     Description      |
+| --------------- | :------------------: |
+| TyreType        |   Crossply/Radial    |
+| Tyres           |    Tyre compound     |
+| OverallDiameter |     millimeters      |
+| RimDiameter     |        inches        |
+| FrontTyreWidth  |     millimeters      |
+| RearTyreWidth   |     millimeters      |
+| RimMaterial     |   Chosen material    |
+| QualityTyre     | Quality points spent |
 
 ### Brakes 
-| Key               |     Description      |
-| ----------------- | :------------------: |
-| FrontBrakeType    |     Drums/Discs      |
-| FrontBrakeOptions |    # of calipers     |
-| FrontPadType      |       Overall        |
-| FrontPadSize      |      Brake Size      |
-| RearBrakeType     |     Drums/Discs      |
-| RearBrakeOptions  |    # of calipers     |
-| RearPadSize       |      Brake Size      |
-| BrakeBias         | number, 0 through 1, |
-| QualityBrakes     |                      |
+| Key               |               Description               |
+| ----------------- | :-------------------------------------: |
+| FrontBrakeType    |     Drums/Discs (line as in editor)     |
+| FrontBrakeOptions |    # of calipers (line as in editor)    |
+| FrontPadSize      |         Front Brake Size in mm          |
+| RearBrakeType     |     Drums/Discs (line as in editor)     |
+| RearBrakeOptions  |    # of calipers (line as in editor)    |
+| RearPadSize       |          Rear Brake Size in mm          |
+| PadType           | Float number, 0 to 1 where 0 is softest |
+| BrakeBias         |          Float number, 0 to 1           |
+| QualityBrakes     |          Quality points spent           |
 
 ### Aero
-| Key              |        Description         |
-| ---------------- | :------------------------: |
-| Undertray        |        Name of one         |
-| Downforce        | amout of,   0-none, 1-100% |
-| ActiveWing       |            y/n             |
-| ActiveCooling    |            y/n             |
-| InclinationFront | Front and rear wing angle  |
-| InclinationRear  |          in 0 - 1          |
+| Key                    |                   Description                    |
+| ---------------------- | :----------------------------------------------: |
+| Undertray              |                line as in editor                 |
+| Downforce              |         Float number, 0 - none, 1 - 100%         |
+| ActiveWing             |                line as in editor                 |
+| ActiveCooling          |                line as in editor                 |
+| InclinationFront       | Float number, Front wing angle, 0 - 0%, 1 - 100% |
+| InclinationRear        |          Float number, Rear wing angle           |
+| CoolingAirflowFraction |               Float number, 0 to 1               |
+| BrakeCoolingFraction   |               Float number, 0 to 1               |
+| QualityAero            |               Quality points spent               |
 
 ### Interior, Driver Assists and Safety
-| Key                |        Description         |
-| ------------------ | :------------------------: |
-| Interior           |      Chosen Interior       |
-| Entertainment      |    Chosen Entertainment    |
-| PowerSteering      |       Same as above        |
-| Assists            |            -//-            |
-| Safety             |            -//-            |
-| QualityInterior    |        for Interior        |
-| QualityElectronics | for Assists/Power Steering |
-| QualitySafety      |         for Safety         |
+| Key                |                  Description                   |
+| ------------------ | :--------------------------------------------: |
+| Interior           |                 for all below                  |
+| Entertainment      |               line as in editor                |
+| PowerSteering      |                                                |
+| Assists            |                                                |
+| SafetyFeatures     |                                                |
+| QualityInterior    |        Quality points spent on Interior        |
+| QualityElectronics | Quality points spent on Assists/Power Steering |
+| QualitySafety      |         Quality points spent on Safety         |
 
 ### Suspension
-| Key               |   Description    |
-| ----------------- | :--------------: |
-| Springs           | Type of springs  |
-| Dampers           | Type of dampers  |
-| SwayBars          | Type of sway bar |
-| FrontCamber       |      angle       |
-| RearCamber        |      angle       |
-| QualitySuspension |                  |
+| Key                   |     Description      |
+| --------------------- | :------------------: |
+| Springs               |    for all below     |
+| Dampers               |  line as in editor   |
+| SwayBars              |                      |
+| FrontCamber           |        angle         |
+| RearCamber            |        angle         |
+| FrontSpringStiffness  |  idk for all below   |
+| RearSpringStiffness   |
+| FrontDamperStiffness  |
+| RearDumperStiffness   |
+| FrontSwayBarStiffness |
+| RearSwayBarStiffness  |
+| RideHeight            |
+| SuspensionOffset      |
+| BaseFrontTrackWidth   |
+| BaseRearTrackWidth    |
+| QualitySuspension     | Quality points spent |
 
 ### Engine Configuration
-| Key           |       Description       |
-| ------------- | :---------------------: |
-| BlockType     |   inline/v# 60*/Boxer   |
-| BlockConfig   | Inline-3/v8 60*/Boxer 6 |
-| BlockMaterial |        Material         |
-| Head          |   Head configuration    |
-| HeadMaterial  |        Material         |
-| Valves        |       Valve Count       |
-| VVL           |           Y/N           |
-| Bore          |  Bore of Engine Family  |
-| Stroke        | Stroke of Engine Family |
+| Key           |                 Description                 |
+| ------------- | :-----------------------------------------: |
+| BlockType     |   inline/v# 60*/Boxer (line as in editor)   |
+| BlockConfig   | Inline-3/v8 60*/Boxer 6 (line as in editor) |
+| BlockMaterial |                  Material                   |
+| Head          |             Head configuration              |
+| HeadMaterial  |                  Material                   |
+| Valves        |                 Valve Count                 |
+| VVL           |                     Y/N                     |
+| Bore          |            Bore of Engine Family            |
+| Stroke        |           Stroke of Engine Family           |
 
 ### Engine Stats
-| Key                   | Description |
-| --------------------- | :---------: |
-| EngineWeight          |     kg      |
-| PerfomanceIndex       |
-| PeakTorque            |     idk     |
-| PeakTorqueRPM         |
-| PeakPower             |     hp      |
-| PeakPowerRPM          |
-| PeakBoost             |
-| PeakBoostRPM          |
-| MaxRPM                |
-| Capacity              |   litres    |
-| ManHours              |
-| Noise                 |
-| Responsiveness        |
-| Smoothness            |
-| EngineEngineeringTime |
-| EngineMaterialCost    |
-| EngineServiceCost     |
+| Key                |            Description            |
+| ------------------ | :-------------------------------: |
+| EngineWeight       |                kg                 |
+| PerfomanceIndex    |               index               |
+| PeakTorque         |               in Nm               |
+| PeakTorqueRPM      |        Rpm at peak Torque         |
+| PeakPower          |  in HP (converted those from kW)  |
+| PeakPowerRPM       |         Rpm at peak Power         |
+| PeakBoost          |         Peak boost at bar         |
+| PeakBoostRPM       | Rpm at which Turbo spools at full |
+| MaxRPM             |              Redline              |
+| Capacity           |             in litres             |
+| Noise              |               index               |
+| Responsiveness     |               index               |
+| Smoothness         |               index               |
+| EnginePU           |      Engine Production Units      |
+| EngineET           |      Engine Engineering Time      |
+| EngineMaterialCost |       Engine Material Cost        |
+| EngineServiceCost  |        Engine Service Cost        |
 
 ### Engine Extended Configuration/Stats 
-| Key                  |         Description          |
-| -------------------- | :--------------------------: |
-| CoolingRequired      |
-| EngineEmissions      |
-| IdleSpeed            |
-| VarianBore           |
-| VariantStroke        |
-| Crank                |           type of            |
-| Conrods              |           type of            |
-| Pistons              |           type of            |
-| VVT                  |             y/n              |
-| Compression          |
-| CamProfileSetting    |
-| VVLCamProfileSetting |
-| Aspiration           |      NA/SingleTurbo/TT       |
-| AspirationType       |     NA/Forced Induction      |
-| AspirationOption     |    Ball/Journal Bearings     |
-| IntercoolerSetting   |       as relative 0-1        |
-| ARRatio              |
-| FuelSystemType       |           Carb/Inj           |
-| FuelSystem           |      MPFI/DCOE/2BBRRRL       |
-| IntakeManifold       |   Single/Twin/Per Cylinder   |
-| Intake               |   Standart/Perfomance/Race   |
-| FuelType             | string like "Super Unleaded" |
-| Headers              |
-| ExhaustCount         |
-| Cat                  |   Catalytic converter type   |
-| Muffler1             |
-| Muffler2             |
-| QualityBottomEnd     |
-| QualityTopEnd        |
-| QualityAspiration    |
-| QualityFuelSystem    |
-| QualityExhaust       |
+| Key                   |                 Description                 |
+| --------------------- | :-----------------------------------------: |
+| CoolingRequired       |                    index                    |
+| EngineEmissions       |                    index                    |
+| IdleSpeed             |                  Idle RPM                   |
+| VarianBore            |             number as in editor             |
+| VariantStroke         |             number as in editor             |
+| Crank                 |       for all below line as in editor       |
+| Conrods               |                                             |
+| Pistons               |                                             |
+| VVT                   |                                             |
+| Compression           |              Compression ratio              |
+| CamProfileSetting     |             Number from 0 to 1              |
+| VVLCamProfileSetting  |                same as above                |
+| Aspiration            |              NA/SingleTurbo/TT              |
+| AspirationType        |             NA/Forced Induction             |
+| AspirationOption      |            Ball/Journal Bearings            |
+| IntercoolerSetting    |            Float number, 0 to 1             |
+| ARRatio               |             number as in editor             |
+| FuelSystemType        |            Carburated/Injection             |
+| FuelSystem            | MPFI/DCOE/2BBRRRL Carb  (line as in editor) |
+| IntakeManifold        |  Single/Twin/Twin Carb (line as in editor)  |
+| Intake                |       Intake type (line as in editor)       |
+| FuelType              |    "Super Unleaded" (line as in editor)     |
+| AFR                   |              Air to Fuel Ratio              |
+| IgnitionTimingSetting |                Float, 0 to 1                |
+| Headers               |              line as in editor              |
+| ExhaustCount          |                                             |
+| ExhaustDiameter       |                   inches                    |
+| Cat                   |          Catalytic converter type           |
+| Muffler1              |              line as in editor              |
+| Muffler2              |              line as in editor              |
+| QualityBottomEnd      |                Points spent                 |
+| QualityTopEnd         |
+| QualityAspiration     |
+| QualityFuelSystem     |
+| QualityExhaust        |

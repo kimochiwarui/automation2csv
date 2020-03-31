@@ -13,8 +13,9 @@ def replaceValues(arg, argValue):
         },
         'DriveType': {
             'DriveType_TransRWD_Name': 'RWD',
-            'DriveType_TransFWD_Name': 'FWD',
             'DriveType_LongRWD_Name': 'RWD',
+            'DriveType_TransFWD_Name': 'FWD',
+            'DriveType_LongFWD_Name': 'FWD',
             'DriveType_Long4X4_Name': '4x4',
             'DriveType_Long4WD_Name': 'AWD'
         },
@@ -78,8 +79,8 @@ def replaceValues(arg, argValue):
         },
         'RearBrakeType': {
             'Brake_Drum_Name': 'Drums',
-            'BrakeDisc_Solid_Name': 'Solid Disc Brakes',
-            'BrakeDisc_Vented_Name': 'Vented Disc Brakes',
+            'BrakeDisc_Solid_Name': 'Solid Disc',
+            'BrakeDisc_Vented_Name': 'Vented Disc',
             'BrakeDisc_CarCeramic_Name': 'Carbon Ceramic'
         },
         'RearBrakeOptions': {
@@ -121,27 +122,32 @@ def replaceValues(arg, argValue):
             'Entertain_Premium_AM_Name': 'Premium AM Radio',
             'Entertain_Luxury_AM_Name': 'Luxury AM Radio',
             'Entertain_Phonograph_Name': 'Phonograph',
-            # 
+            #
             'Entertain_Basic_8Track_Name': 'Basic 8 Track',
             'Entertain_Standard_8Track_Name': 'Standart 8 Track',
             'Entertain_Premium_8Track_Name': 'Premium 8 Track',
             'Entertain_Luxury_8Track_Name': 'Luxury 8 Track',
-            # 
+            #
             'Entertain_Basic_Cassette_Name': 'Basic Cassette Player',
             'Entertain_Standard_Cassette_Name': 'Standart Cassette Player',
             'Entertain_Premium_Cassette_Name': 'Premium Cassete Player',
             'Entertain_Luxury_Cassette_Name': 'Luxury Cassete Player',
-            # 
+            #
             'Entertain_Basic_CD_Name': 'Basic CD Player',
             'Entertain_Standard_CD_Name': 'Standart CD Player',
             'Entertain_Premium_CD_Name': 'Premium CD Player',
             'Entertain_Luxury_CD_Name': 'Luxury CD Player',
-            # 
+            #
+            'Entertain_Basic_SatNav_Name': 'Basic SatNav',
+            'Entertain_Standard_SatNav_Name': 'Standart SatNav',
+            'Entertain_Premium_SatNav_Name': 'Premium SatNav',
+            'Entertain_Luxury_SatNav_Name': 'Luxury SatNav',
+            #
             'Entertain_Basic_Infotainment_Name': 'Basic Infotainment',
             'Entertain_Standard_Infotainment_Name': 'Standart Infotainment',
             'Entertain_Premium_Infotainment_Name': 'Premium Infotainment',
             'Entertain_Luxury_Infotainment_Name': 'Luxury Infotainment',
-            # 
+            #
             'Entertain_Basic_HUD_Name': 'Basic HUD',
             'Entertain_Standard_HUD_Name': 'Standart HUD',
             'Entertain_Premium_HUD_Name': 'Premium HUD',
@@ -161,7 +167,7 @@ def replaceValues(arg, argValue):
             'DriveAssist_TractionPackage3_Name': 'ESC',
             'DriveAssist_TractionPackage4_Name': 'ESC+LC',
         },
-        'Safety': {
+        'SafetyFeatures': {
             'Safety_None_Name': 'None',
             'Safety_Basic_40s_Name': 'Basic 40s',
             'Safety_Standard_40s_Name': 'Standart 40s',
@@ -169,31 +175,31 @@ def replaceValues(arg, argValue):
             'Safety_Basic_50s_Name': 'Basic 50s',
             'Safety_Standard_50s_Name': 'Standart 50s',
             'Safety_Advanced_50s_Name': 'Advanced 50s',
-            
+
             'Safety_Basic_60s_Name': 'Basic 60s',
             'Safety_Standard_60s_Name': 'Standart 60s',
             'Safety_Advanced_60s_Name': 'Advanced 60s',
-            
+
             'Safety_Basic_70s_Name': 'Basic 70s',
             'Safety_Standard_70s_Name': 'Standart 70s',
             'Safety_Advanced_70s_Name': 'Advanced 70s',
-            
+
             'Safety_Basic_80s_Name': 'Standart 80s',
             'Safety_Standard_80s_Name': 'Standart 80s',
             'Safety_Advanced_80s_Name': 'Advanced 80s',
-            
+
             'Safety_Basic_90s_Name': 'Basic 90s',
             'Safety_Standard_90s_Name': 'Standart 90s',
             'Safety_Advanced_90s_Name': 'Advanced 90s',
-            
+
             'Safety_Basic_00s_Name': 'Basic 00',
             'Safety_Standard_00s_Name': 'Standart 00s',
             'Safety_Advanced_00s_Name': 'Advanced 00s',
-            
+
             'Safety_Basic_10s_Name': 'Basic 10s',
             'Safety_Standard_10s_Name': 'Standart 10s',
             'Safety_Advanced_10s_Name': 'Advanced 10s',
-            
+
             'Safety_Basic_20s_Name': 'Basic 20s',
             'Safety_Standard_20s_Name': 'Standart 20s',
             'Safety_Advanced_20s_Name': 'Advanced 20s',
@@ -218,9 +224,9 @@ def replaceValues(arg, argValue):
             'SwayBars_Offroad_Name': 'Offroad',
             'SwayBars_Active_Name': 'Active',
         },
-        # 
+        #
         # MODEL
-        # 
+        #
         'Chassis': {
             'Chassis_Ladder_Name': 'Ladder',
             'Chassis_SpaceFrame_Name': 'Spaceframe',
@@ -244,7 +250,6 @@ def replaceValues(arg, argValue):
             'EngPlace_MidTransverse_Name': 'Mid Transverse',
             'EngPlace_MidLong_Name': 'Mid Longitudinal',
             'EngPlace_RearLong_Name': 'Rear Longitudinal'
-            # Rear Trans?
         },
         'FrontSuspension': {
             'Suspend_SolAxLeaf_Name': 'Solid Axel Leaf',
@@ -272,7 +277,7 @@ def replaceValues(arg, argValue):
             'PanelMat_FibreGlass_Name': 'Fibre Glass',
             'PanelMat_CarbonFibre_Name': 'Carbon Fiber'
         },
-        # 
+        #
         #  Variant
         #
         'Crank': {
@@ -463,7 +468,21 @@ def replaceValues(arg, argValue):
         'Capacity',
         'ProductionUnits',
         'EngineeringTime',
-        'MaterialCosts'
+        'MaterialCosts',
+        'PowerDistribution',
+        'PadType',
+        'BrakeBias',
+        'Downforce',
+        'InclinationFront',
+        'InclinationRear',
+        'CoolingAirflowFraction',
+        'BrakeCoolingFraction',
+        'CamProfileSetting',
+        'VVLCamProfileSetting',
+        'PeakBoost',
+        'ARRatio',
+        'IgnitionTimingSetting',
+
     }
 
     if arg == 'FootPrintWidth':
@@ -488,4 +507,3 @@ def replaceValues(arg, argValue):
     if type(argValue) is float:
         return round(argValue, 1)
     return argValue
-        
