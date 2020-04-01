@@ -3,5 +3,3 @@ build
 *.spec
 __*__
 QualityCheck.txt
-
-pyinstaller --log-level=WARN --windowed  --onefile --add-data="icon2.png;img" automation2csv.py
